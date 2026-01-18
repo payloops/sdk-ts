@@ -45,7 +45,7 @@ export class LoopClient {
       const response = await fetch(url, {
         method,
         headers,
-        body: body ? JSON.stringify(body) : undefined,
+        body: method !== 'GET' ? JSON.stringify(body ?? {}) : undefined,
         signal: controller.signal
       });
 
