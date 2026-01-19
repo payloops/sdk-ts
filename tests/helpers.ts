@@ -110,7 +110,10 @@ export async function configureProcessor(
 ): Promise<void> {
   const defaultCredentials =
     processor === 'stripe'
-      ? { secretKey: 'sk_test_fake', publishableKey: 'pk_test_fake' }
+      ? {
+          secretKey: process.env.STRIPE_SECRET_KEY || 'sk_test_fake',
+          publishableKey: process.env.STRIPE_PUBLISHABLE_KEY || 'pk_test_fake',
+        }
       : { keyId: 'rzp_test_fake', keySecret: 'fake_secret' };
 
   const response = await fetch(`${API_BASE_URL}/api/processors/${processor}`, {
